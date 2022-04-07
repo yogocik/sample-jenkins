@@ -1,7 +1,6 @@
 pipeline{
     agent any
     environment {
-        root = "/usr/local/go/bin/go"
         branch = "master"
         scmUrl = "https://github.com/yogocik/sample-jenkins.git"
     }
@@ -16,14 +15,9 @@ pipeline{
                 git branch: "${branch}", url:"${scmUrl}"
             }
         }
-        stage("Go Test"){
+        stage("Go Dockerize"){
             steps{
-                sh "${root} test ./... -cover"
-            }
-        }
-        stage("Go Build"){
-            steps{
-                sh "${root} build ./..."
+                sh "docker build -t sample-jenkins ."
             }
         }
         stage("Deploy"){
