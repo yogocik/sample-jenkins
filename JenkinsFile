@@ -5,11 +5,6 @@ pipeline{
         scmUrl = "https://github.com/yogocik/sample-jenkins.git"
     }
     stages{
-        stage("Go version"){
-            steps{
-                sh "${root} version"
-            }
-        }
         stage("Git Clone"){
             steps{
                 git branch: "${branch}", url:"${scmUrl}"
